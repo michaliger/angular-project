@@ -1,1 +1,34 @@
-<p>sign-in works!</p>
+<div class="signin-container">
+  <div class="card">
+    <h2>כניסה לחשבון</h2>
+
+    <form [formGroup]="signInForm" (ngSubmit)="onSignIn()">
+      
+      <div class="field">
+        <label>אימייל</label>
+        <input type="email" formControlName="email" [class.invalid]="f['email'].touched && f['email'].invalid">
+        
+        @if (f['email'].touched && f['email'].invalid) {
+          <div class="error">
+            @if (f['email'].errors?.['required']) { <span>חובה להזין מייל</span> }
+            @if (f['email'].errors?.['email']) { <span>כתובת לא תקינה</span> }
+          </div>
+        }
+      </div>
+
+      <div class="field">
+        <label>סיסמה</label>
+        <input type="password" formControlName="password" [class.invalid]="f['password'].touched && f['password'].invalid">
+        
+        @if (f['password'].touched && f['password'].invalid) {
+          <div class="error">
+            @if (f['password'].errors?.['required']) { <span>חובה להזין סיסמה</span> }
+            @if (f['password'].errors?.['minlength']) { <span>מינימום 6 תווים</span> }
+          </div>
+        }
+      </div>
+
+      <button type="submit" [disabled]="signInForm.invalid">התחברות</button>
+    </form>
+  </div>
+</div>
