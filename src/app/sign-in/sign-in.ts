@@ -9,19 +9,22 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-sign-in',
-  standalone: true, // הגדרה כרכיב עצמאי
-  imports: [CommonModule, ReactiveFormsModule,CommonModule, 
+  standalone: true,
+  imports: [
+    CommonModule, 
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule], // ייבוא המודולים ישירות לכאן
+    MatCardModule
+  ],
   templateUrl: './sign-in.html',
   styleUrls: ['./sign-in.css']
 })
 export class SignInComponent {
   signInForm: FormGroup;
+  hide = true; // משתנה לשליטה על הצגת הסיסמה
 
   constructor(private fb: FormBuilder) {
     this.signInForm = this.fb.group({
@@ -30,12 +33,12 @@ export class SignInComponent {
     });
   }
 
-  // פונקציית עזר לקיצור הגישה לשדות
   get f() { return this.signInForm.controls; }
 
   onSignIn() {
     if (this.signInForm.valid) {
       console.log('נתוני התחברות:', this.signInForm.value);
+      // כאן תבוא הקריאה לשרת בעתיד
     }
   }
 }
